@@ -50,6 +50,21 @@ export class Ctrl {
     this.redraw();
   };
 
+  playAi_white_5 = async () => {
+    this.game = undefined;
+    this.page = 'game';
+    this.redraw();
+    await this.auth.fetchBody('/api/challenge/ai', {
+      method: 'post',
+      body: formData({
+        level: 1,
+        'clock.limit': 60 * 5,
+        'clock.increment': 5,
+        'color':'white',
+      }),
+    });
+  };
+
   playAi = async () => {
     this.game = undefined;
     this.page = 'game';
@@ -58,8 +73,8 @@ export class Ctrl {
       method: 'post',
       body: formData({
         level: 1,
-        'clock.limit': 60 * 3,
-        'clock.increment': 2,
+        'clock.limit': 60 * 10,
+        'clock.increment': 5,
       }),
     });
   };
@@ -67,7 +82,7 @@ export class Ctrl {
   playPool = async (minutes: number, increment: number) => {
     this.seek = await SeekCtrl.make(
       {
-        rated: true,
+        rated: false,
         time: minutes,
         increment,
       },

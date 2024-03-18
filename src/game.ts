@@ -8,6 +8,7 @@ import { opposite, parseUci } from 'chessops/util';
 import { Chess, defaultSetup } from 'chessops';
 import { makeFen, parseFen } from 'chessops/fen';
 import { chessgroundDests } from 'chessops/compat';
+import { playerCheck } from './ratings';
 
 export interface BoardCtrl {
   chess: Chess;
@@ -60,6 +61,8 @@ export class GameCtrl implements BoardCtrl {
     await this.root.auth.fetchBody(`/api/board/game/${this.game.id}/resign`, { method: 'post' });
   };
 
+  
+
   playing = () => this.game.state.status == 'started';
 
   chessgroundConfig = () => ({
@@ -93,7 +96,13 @@ export class GameCtrl implements BoardCtrl {
           resolve(ctrl);
         }
       };
+      await playerCheck(id);
       stream = await root.auth.openStream(`/api/board/game/stream/${id}`, {}, handler);
+      
+      
+      
+      
+
     });
 
   private handle = (msg: any) => {

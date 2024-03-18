@@ -5,7 +5,9 @@ import { Game, Renderer } from '../interfaces';
 import OngoingGames from '../ongoingGames';
 import { href } from '../routing';
 
+
 export const renderHome: Renderer = ctrl => (ctrl.auth.me ? userHome(ctrl) : anonHome());
+
 
 const userHome = (ctrl: Ctrl) => [
   h('div', [
@@ -16,7 +18,23 @@ const userHome = (ctrl: Ctrl) => [
           attrs: { type: 'button' },
           on: { click: ctrl.playAi },
         },
-        'Play the Lichess AI'
+        'Play the Lichess AI 10+5'
+      ),
+      // h(
+      //   'button.btn.btn-outline-primary.btn-lg',
+      //   {
+      //     attrs: { type: 'button' },
+      //     on: { click:()=> playerRating('Adiseeker') },
+      //   },
+      //   'Show profile'
+      // ),
+      h(
+        'button.btn.btn-outline-primary.btn-lg',
+        {
+          attrs: { type: 'button' },
+          on: { click: ctrl.playAi_white_5 },
+        },
+        'Play white with Lichess AI 5+5'
       ),
       h(
         'button.btn.btn-outline-primary.btn-lg',
@@ -32,7 +50,7 @@ const userHome = (ctrl: Ctrl) => [
           attrs: { type: 'button' },
           on: { click: () => ctrl.playPool(10, 0) },
         },
-        'Play a rated 10+0 game with a random opponent'
+        'Play a 10+0 game with a random Player'
       ),
     ]),
     h('h2.mt-5', 'Games in progress'),
@@ -55,6 +73,7 @@ const renderGameWidget = (game: Game) =>
       h('span.game-widget__opponent', [
         h('span.game-widget__opponent__name', game.opponent.username || 'Anon'),
         game.opponent.rating && h('span.game-widget__opponent__rating', game.opponent.rating),
+        
       ]),
       h(
         'span.game-widget__board.cg-wrap',

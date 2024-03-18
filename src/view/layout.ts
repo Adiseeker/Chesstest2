@@ -18,7 +18,7 @@ const renderNavBar = (ctrl: Ctrl) =>
         {
           attrs: href('/'),
         },
-        'Lichess API Demo'
+        'Fairchess'
       ),
       h(
         'button.navbar-toggler',

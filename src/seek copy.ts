@@ -29,7 +29,6 @@ export class SeekCtrl {
       },
       _ => {}
     );
-    // await this.root.auth.fetchBody(`/api/board/game/${this.game.id}/resign`, { method: 'post' });
     // const ratings = await playerRating(ctrl.game[opposite(ctrl.pov)].name);
     return new SeekCtrl(stream, root);
   };
